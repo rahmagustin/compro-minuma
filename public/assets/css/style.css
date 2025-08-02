@@ -184,7 +184,7 @@
         display: flex;
         margin-top: 20px;
         padding-bottom: 20px;
-        background: var(--bs-light);
+        /* background: var(--bs-light); */
         border-radius: 10px;
     }
 
@@ -223,9 +223,9 @@
     .navbar .navbar-nav {
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: end;
         align-items: center;
-        background: var(--bs-light);
+        /* background: var(--bs-light); */
         border-radius: 10px;
     }
 

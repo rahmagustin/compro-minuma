@@ -142,44 +142,85 @@ if (!empty($categoriesAktivitas)) {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
-                        <a href="index.html" class="nav-item nav-link">Beranda</a>
-                        <a href="about.html" class="nav-item nav-link active">Tentang</a>
-                        <a href="produk.html" class="nav-item nav-link">Produk</a>
+                        <a href="<?= base_url($lang . '/') ?>"
+                            class="nav-item nav-link <?= isset($activeMenu) && $activeMenu === 'home' ? 'active' : '' ?>">
+                            <?= lang('bahasa.Beranda'); ?>
+                        </a>
+                        <a href="<?= base_url($lang . '/' . $aboutLink) ?>"
+                            class="nav-item nav-link <?= isset($activeMenu) && $activeMenu === 'about' ? 'active' : '' ?>">
+                            <?= lang('bahasa.Tentang'); ?>
+                        </a>
+                        <a href="<?= base_url($lang . '/' . $productLink) ?>"
+                            class="nav-item nav-link <?= isset($activeMenu) && $activeMenu === 'product' ? 'active' : '' ?>">
+                            <?= lang('bahasa.Produk'); ?>
+                        </a>
                         <div class="nav-item dropdown">
-                            <a href="aktivitas.html" class="nav-link" data-bs-toggle="dropdown">
-                                <span class="dropdown-toggle">Aktivitas</span>
+                            <a class="nav-link dropdown-toggle <?= (uri_string() === 'activity' || str_contains(uri_string(), 'activity')) ? 'active' : '' ?>"
+                                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= lang('bahasa.Aktivitas'); ?>
                             </a>
                             <div class="dropdown-menu">
-                                <a href="aktivitas.html" class="dropdown-item">Pelatihan</a>
-                                <a href="aktivitas.html" class="dropdown-item">Kegiatan Sosial</a>
-                                <a href="aktivitas.html" class="dropdown-item">Kunjungan</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="artikel.html" class="nav-link" data-bs-toggle="dropdown">
-                                <span class="dropdown-toggle">Artikel</span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="artikel.html" class="dropdown-item">Gaya Hidup</a>
-                                <a href="artikel.html" class="dropdown-item">Edukasi</a>
-                                <a href="artikel.html" class="dropdown-item">Info</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Kontak</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-bs-toggle="dropdown">
-                                <span class="dropdown-toggle">Bahasa</span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">
-                                    <img src="https://flagcdn.com/w40/id.png" width="20" class="me-2" alt="ID Flag"> Indonesia
+                                <a class="dropdown-item" href="<?= base_url($lang . '/' . $activityLink) ?>">
+                                    <?= $lang == 'id' ? 'Semua Aktivitas' : 'All Activity'; ?>
                                 </a>
-                                <a href="#" class="dropdown-item">
-                                    <img src="https://flagcdn.com/w40/gb.png" width="20" class="me-2" alt="UK Flag"> English
-                                </a>
-                            </div>
 
+                                <?php if (!empty($kategoriAktivitasLinks)): ?>
+                                    <?php foreach ($kategoriAktivitasLinks as $kategoriAktivitasLink): ?>
+                                        <a class="dropdown-item" href="<?= $kategoriAktivitasLink['url']; ?>">
+                                            <?= $kategoriAktivitasLink['name']; ?>
+                                        </a>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <a class="dropdown-item"><?= $lang == 'id' ? 'Tidak ada kategori' : 'No Categories available'; ?></a>
+                                <?php endif; ?>
+                            </div>
                         </div>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle <?= (uri_string() === 'article' || str_contains(uri_string(), 'article')) ? 'active' : '' ?>"
+                                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= lang('bahasa.Artikel'); ?>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="<?= base_url($lang . '/' . $articleLink) ?>">
+                                    <?= $lang == 'id' ? 'Semua Artikel' : 'All Article'; ?>
+                                </a>
+
+                                <?php if (!empty($categoryLinks)): ?>
+                                    <?php foreach ($categoryLinks as $categoryLink): ?>
+                                        <a class="dropdown-item" href="<?= $categoryLink['url']; ?>">
+                                            <?= $categoryLink['name']; ?>
+                                        </a>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <a class="dropdown-item">
+                                        <?= $lang == 'id' ? 'Tidak ada kategori' : 'No Categories available'; ?>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <a href="<?= base_url($lang . '/' . $contactLink) ?>"
+                            class="nav-item nav-link <?= isset($activeMenu) && $activeMenu === 'contact' ? 'active' : '' ?>">
+                            <?= lang('bahasa.Kontak'); ?>
+                        </a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>
+                                    <?= ($lang === 'en') ? 'English' : 'Indonesia'; ?>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item <?= $lang === 'id' ? 'active disabled' : ''; ?>" href="<?= $indonesia_url; ?>">
+                                        <img src="https://flagcdn.com/w40/id.png" width="20" class="me-2" alt="ID Flag"> Indonesia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item <?= $lang === 'en' ? 'active disabled' : ''; ?>" href="<?= $english_url; ?>">
+                                        <img src="https://flagcdn.com/w40/gb.png" width="20" class="me-2" alt="UK Flag"> English
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </div>
                 </div>
             </nav>
