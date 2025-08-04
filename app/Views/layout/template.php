@@ -94,7 +94,13 @@ if (!empty($categoriesAktivitas)) {
 
 <head>
     <meta charset="utf-8">
-    <title>Minuma - Selalu Siap Temani Harimu</title>
+    <?php if (isset($metaCategory)): ?>
+        <title><?= $lang == 'id' ? $metaCategory['title_id'] : $metaCategory['title_en']; ?></title>
+        <meta name="description" content="<?= $lang == 'id' ? $metaCategory['meta_desc_id'] : $metaCategory['meta_desc_en']; ?>">
+    <?php else: ?>
+        <title><?= $lang == 'id' ? $meta['title_id'] : $meta['title_en']; ?></title>
+        <meta name="description" content="<?= $lang == 'id' ? $meta['meta_desc_id'] : $meta['meta_desc_en']; ?>">
+    <?php endif; ?>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -115,10 +121,10 @@ if (!empty($categoriesAktivitas)) {
 
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -131,11 +137,15 @@ if (!empty($categoriesAktivitas)) {
     </div>
     <!-- Spinner End -->
     <!-- Navbar & Hero Start -->
-    <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
+    <div class="container-fluid nav-bar px-0 px-lg-4">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a href="#" class="navbar-brand p-0">
+                <!-- <a href="#" class="navbar-brand p-0">
                     <h1 class="text-primary mb-0"><i class="fab fa-slack me-2"></i> Minuma</h1>
+                </a> -->
+                <a class="navbar-brand d-flex align-items-center" href="<?= base_url($lang . '/') ?>">
+                    <img src="<?= base_url('assets/img/' . $profil['logo_perusahaan']); ?>" alt="<?= $profil['nama_perusahaan']; ?>" width="40" height="40" class="me-2">
+                    <h1 class="text-primary mb-0 d-inline-block"><?= $profil['nama_perusahaan']; ?></h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -237,42 +247,84 @@ if (!empty($categoriesAktivitas)) {
                 <!-- Tautan Berguna -->
                 <div class="col-md-6 col-lg-3">
                     <div class="footer-item">
-                        <h4 class="text-white mb-4">Tautan Berguna</h4>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Beranda</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Tentang Kami</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Layanan</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Artikel</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Kontak</a>
+                        <h4 class="text-white mb-4"><?= lang('bahasa.headerLink'); ?></h4>
+                        <a href="<?= base_url($lang . '/' . $homeLink) ?>" class="<?= isset($data['activeMenu']) && $data['activeMenu'] === 'home' ? 'active' : '' ?>" style="color: white; text-decoration: none;">
+                            <i class="fas fa-angle-right me-2"></i><?= lang('bahasa.Beranda'); ?>
+                        </a>
+                        <a style="color: white; text-decoration: none;" href="<?= base_url($lang . '/' . $aboutLink) ?>" class="<?= isset($data['activeMenu']) && $data['activeMenu'] === 'about' ? 'active' : '' ?>">
+                            <i class="fas fa-angle-right me-2"></i><?= lang('bahasa.Tentang'); ?>
+                        </a>
+                        <a style="color: white; text-decoration: none;" href="<?= base_url($lang . '/' . $productLink) ?>" class="<?= isset($data['activeMenu']) && $data['activeMenu'] === 'product' ? 'active' : '' ?>">
+                            <i class="fas fa-angle-right me-2"></i><?= lang('bahasa.Produk'); ?>
+                        </a>
+                        <a style="color: white; text-decoration: none;" href="<?= base_url($lang . '/' . $articleLink) ?>" class="<?= isset($data['activeMenu']) && $data['activeMenu'] === 'article' ? 'active' : '' ?>">
+                            <i class="fas fa-angle-right me-2"></i><?= lang('bahasa.Artikel'); ?>
+                        </a>
+                        <a style="color: white; text-decoration: none;" href="<?= base_url($lang . '/' . $contactLink) ?>" class="<?= isset($data['activeMenu']) && $data['activeMenu'] === 'contact' ? 'active' : '' ?>">
+                            <i class="fas fa-angle-right me-2"></i><?= lang('bahasa.Kontak'); ?>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Artikel Kami -->
                 <div class="col-md-6 col-lg-3">
                     <div class="footer-item">
-                        <h4 class="text-white mb-4">Artikel Kami</h4>
-                        <p class="text-white mb-2"><i class="fas fa-angle-right me-2"></i> Teknologi (25 artikel)</p>
-                        <p class="text-white mb-2"><i class="fas fa-angle-right me-2"></i> Kesehatan (20 artikel)</p>
-                        <p class="text-white mb-2"><i class="fas fa-angle-right me-2"></i> Gaya Hidup (18 artikel)</p>
+                        <h4 class="text-white mb-4"><?= lang('bahasa.headerService'); ?></h4>
+                        <ul class="list-unstyled">
+                            <?php if (!empty($kategori_teratas) && is_array($kategori_teratas)): ?>
+                                <?php foreach ($kategori_teratas as $kategori): ?>
+                                    <li>
+                                        <a style="color: white; text-decoration: none;" href="<?= base_url("id/artikel/" . $kategori['slug_kategori_id']) ?>">
+                                            <?= $kategori['nama_kategori_id']; ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li>No categories available</li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Sosial Media -->
                 <div class="col-md-6 col-lg-3">
                     <div class="footer-item">
-                        <h4 class="text-white mb-4">Sosial Media</h4>
-                        <div class="d-flex flex-column">
-                            <a href="#" class="text-white mb-2"><i class="fab fa-instagram me-2"></i> Instagram</a>
-                        </div>
+                        <h4 class="text-white mb-4"><?= lang('bahasa.sosmedLink'); ?></h4>
+                        <ul class="list-unstyled">
+                            <?php if (!empty($sosmed) && is_array($sosmed)): ?>
+                                <?php foreach ($sosmed as $s): ?>
+                                    <li>
+                                        <a style="color: white; text-decoration: none;" href="<?= $s['link_sosmed']; ?>" target="_blank">
+                                            <img src="<?= base_url('assets/img/logo/' . $s['logo_sosmed']); ?>" alt="<?= $s['nama_sosmed']; ?>" style="width: 20px; height: 20px; margin-right: 5px;">
+                                            <?= $s['nama_sosmed']; ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li>No social media available</li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Marketplace -->
                 <div class="col-md-6 col-lg-3">
                     <div class="footer-item">
-                        <h4 class="text-white mb-4">Marketplace</h4>
-                        <div class="d-flex flex-column">
-                            <p>No sosial media available</p>
-                        </div>
+                        <h4 class="text-white mb-4"><?= lang('bahasa.marketplaceLink'); ?></h4>
+                        <ul class="list-unstyled">
+                            <?php if (!empty($marketplace) && is_array($marketplace)): ?>
+                                <?php foreach ($marketplace as $s): ?>
+                                    <li>
+                                        <a style="color: white; text-decoration: none;" href="<?= $s['link_marketplace']; ?>" target="_blank">
+                                            <img src="<?= base_url('assets/img/logo/' . $s['logo_marketplace']); ?>" alt="<?= $s['nama_marketplace']; ?>" style="width: 20px; height: 20px; margin-right: 5px;">
+                                            <?= $s['nama_marketplace']; ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li>No social media available</li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
                 </div>
             </div>

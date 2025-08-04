@@ -21,9 +21,9 @@ class ActivityController extends BaseController
         $lang = session()->get('lang') ?? 'id';  // Mendapatkan bahasa aktif dari sesi
         $canonical = base_url("$lang/" . ($lang === 'id' ? 'aktivitas' : 'activity') . '/' . $slugCategory);
 
-        if (current_url() !== $canonical) {
-            return redirect()->to($canonical);
-        }
+        // if (current_url() !== $canonical) {
+        //     return redirect()->to($canonical);
+        // }
 
         $categoryModel = new CategoryActivityModel();
         $aktivitasModel = new ActivityModel();
@@ -210,9 +210,9 @@ class ActivityController extends BaseController
         $slugCheck = ($lang === 'id') ? $aktivitas['slug_aktivitas_id'] : $aktivitas['slug_aktivitas_en'];
         $canonical = base_url("$lang/" . ($lang === 'id' ? 'aktivitas' : 'activity') . '/' . ($categorySlugCheck !== false ? $categorySlugCheck : '') . '/' . ($slugCheck !== false ? $slugCheck : ''));
 
-        if (current_url() !== $canonical) {
-            return redirect()->to($canonical);
-        }
+        // if (current_url() !== $canonical) {
+        //     return redirect()->to($canonical);
+        // }
 
         // Tampilkan halaman artikel (misalnya tampilan detail artikel)
         return view('detail_activity', [
