@@ -1,71 +1,53 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 
-    <!-- Header Artikel -->
-    <div class="article-header text-center mt-5">
-        <div class="container">
-            <h1 class="text-primary">5 Alasan Mengapa Kamu Harus Pakai Tumbler Setiap Hari</h1>
+<!-- Header Artikel -->
+<div class="article-header text-center mt-5">
+    <div class="container">
+        <h1 class="text-primary"><?= $lang == 'id' ? $artikel['judul_artikel_id'] : $artikel['judul_artikel_en']; ?></h1>
+        <div class="mb-3">
+            <span class="badge bg-primary me-2"><?= $lang == 'id' ? $artikel['nama_kategori_id'] : $artikel['nama_kategori_en']; ?></span>
         </div>
     </div>
+</div>
 
-    <!-- Konten Artikel dan Sidebar -->
-    <div class="container my-5">
-        <div class="row">
-            <!-- Artikel Utama -->
-            <div class="col-lg-8 mb-5">
-                <img src="img/artikel.jpeg" alt="Gambar Artikel" class="img-fluid rounded mb-4">
-                <p>Menggunakan tumbler dalam aktivitas harian bukan hanya membuatmu terlihat lebih stylish, tapi juga membantu menyelamatkan lingkungan. Di tengah isu perubahan iklim dan peningkatan limbah plastik, membawa tumbler menjadi langkah kecil yang berdampak besar.</p>
+<!-- Konten Artikel dan Sidebar -->
+<div class="container my-5">
+    <div class="row">
+        <!-- Artikel Utama -->
+        <div class="col-lg-8 mb-5">
+            <img src="<?= base_url('assets/img/' . $artikel['foto_artikel']); ?>" alt="<?= $lang == 'id' ? $artikel['alt_artikel_id'] : $artikel['alt_artikel_en']; ?>" alt="Gambar Artikel" class="img-fluid rounded mb-4">
+            <p><?= $lang == 'id' ? $artikel['deskripsi_artikel_id'] : $artikel['deskripsi_artikel_en']; ?></p>
+            <hr class="my-4">
+            <p class="text-muted">Artikel ini dipublikasikan pada <?= date('d F Y', strtotime($artikel['created_at'])); ?></p>
+        </div>
 
-                <h2>Kenapa Tumbler Penting?</h2>
-                <p>Berikut adalah lima alasan mengapa kamu sebaiknya mulai menggunakan tumbler setiap hari:</p>
-                <ol>
-                    <li><strong>Ramah Lingkungan:</strong> Tumbler membantu mengurangi limbah plastik dari botol air sekali pakai.</li>
-                    <li><strong>Lebih Hemat:</strong> Tidak perlu terus membeli air kemasan, cukup isi ulang dari rumah atau refill station.</li>
-                    <li><strong>Lebih Higienis:</strong> Kamu tahu persis siapa yang menggunakan tumbler itu dan bagaimana kebersihannya.</li>
-                    <li><strong>Gaya Hidup Sehat:</strong> Membawa tumbler bisa jadi pengingat untuk cukup minum air setiap hari.</li>
-                    <li><strong>Desain Menarik:</strong> Banyak tumbler sekarang yang stylish dan bisa disesuaikan dengan kepribadianmu.</li>
-                </ol>
-
-                <h3>Kesimpulan</h3>
-                <p>Menggunakan tumbler bukan hanya trend, tapi bentuk komitmen terhadap diri sendiri dan lingkungan. Ayo mulai sekarang dan jadi bagian dari perubahan baik!</p>
-
-                <hr class="my-4">
-                <p class="text-muted">Artikel ini dipublikasikan pada 27 Juli 2025.</p>
-            </div>
-
-            <!-- Sidebar Artikel Terkait -->
-            <div class="col-lg-4">
-                <h4 class="mb-4">Artikel Terkait</h4>
-
-                <!-- Artikel Terkait 1 -->
-                <div class="d-flex mb-3">
-                    <a href="detail-artikel-2.html">
-                        <img src="img/artikel.jpeg" alt="Terkait 1" class="rounded" style="width: 100px; height: 70px; object-fit: cover;">
-                    </a>
-                    <div class="ms-3">
-                        <a href="detail-artikel-2.html" class="text-dark fw-semibold text-decoration-none">
-                            Cara Merawat Tumbler Agar Awet
-                        </a>
-                        <br>
-                        <small class="text-muted">25 Juli 2025</small>
-                    </div>
-                </div>
-
-                <!-- Artikel Terkait 2 -->
-                <div class="d-flex mb-3">
-                    <a href="detail-artikel-3.html">
-                        <img src="img/artikel.jpeg" alt="Terkait 2" class="rounded" style="width: 100px; height: 70px; object-fit: cover;">
-                    </a>
-                    <div class="ms-3">
-                        <a href="detail-artikel-3.html" class="text-dark fw-semibold text-decoration-none">
-                            Tumbler VS Botol Plastik Sekali Pakai
-                        </a>
-                        <br>
-                        <small class="text-muted">24 Juli 2025</small>
-                    </div>
-                </div>
+        <!-- Sidebar Artikel Terkait -->
+        <div class="col-lg-4 wow fadeInRight" data-wow-delay="0.4s">
+            <div class="bg-white rounded p-4 shadow-sm">
+                <h5 class="mb-4 border-bottom pb-2"><?= $lang == 'id' ? 'Artikel Lainnya' : 'Related Articles'; ?></h5>
+                <?php if (!empty($sideArticle)) : ?>
+                    <?php foreach ($sideArticle as $side) : ?>
+                        <div class="d-flex mb-4 border-bottom pb-3">
+                            <a href="<?= base_url($lang == 'id'
+                                            ? 'id/artikel/' . $side['slug_kategori_id'] . '/' . $side['slug_artikel_id']
+                                            : 'en/article/' . $side['slug_kategori_en'] . '/' . $side['slug_artikel_en']); ?>">
+                                <img src="<?= base_url('assets/img/' . $side['foto_artikel']); ?>" alt="<?= $lang == 'id' ? $side['alt_artikel_id'] : $side['alt_artikel_en']; ?>" class="rounded" style="width: 90px; height: 70px; object-fit: cover;">
+                            </a>
+                            <div class="ms-3">
+                                <a href="#" class="text-dark text-decoration-none">
+                                    <h6 class="fw-semibold hover-text-primary mb-1"><?= $lang == 'id' ? $side['judul_artikel_id'] : $side['judul_artikel_en']; ?></h6>
+                                </a>
+                                <p><?= implode(' ', array_slice(explode(' ', $lang == 'id' ? $side['snippet_id'] : $side['snippet_en']), 0, 7)) . '...'; ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p class="text-muted"><?= $lang == 'id' ? 'Tidak ada artikel lain.' : 'No related articles.'; ?></p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
+</div>
 
 <?= $this->endSection(); ?>

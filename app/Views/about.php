@@ -5,27 +5,21 @@
     <div class="container py-5">
         <!-- Judul dan breadcrumb di tengah atas -->
         <div class="text-center mb-5">
-            <h1 class="text-primary">Tentang</h1>
+            <h1 class="text-primary"><?= $lang == 'id' ? $meta['nama_halaman_id'] : $meta['nama_halaman_en']; ?></h1>
         </div>
 
         <!-- Baris dengan dua kolom -->
         <div class="row align-items-center g-5">
             <!-- Kolom Teks -->
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
-                <h2 class="display-6 mb-3">Teman Setia Aktivitas Harian</h2>
-                <p class="mb-3">Minuma hadir sebagai solusi tumbler modern yang ramah lingkungan, tahan lama, dan bergaya. Kami berkomitmen menghadirkan produk yang mendukung gaya hidup aktif dan sehat tanpa mengorbankan estetika maupun fungsionalitas.</p>
-                <p class="mb-4">Dengan berbagai pilihan desain dan ukuran, Minuma menjadi pilihan tepat untuk menemani Anda bekerja, bepergian, berolahraga, atau bersantai.</p>
-                <ul class="list-unstyled">
-                    <li class="text-dark mb-2"><i class="fa fa-check text-primary me-3"></i>Bahan ramah lingkungan & BPA-free</li>
-                    <li class="text-dark mb-2"><i class="fa fa-check text-primary me-3"></i>Menjaga suhu panas & dingin lebih lama</li>
-                    <li class="text-dark mb-2"><i class="fa fa-check text-primary me-3"></i>Desain elegan dan bisa disesuaikan</li>
-                </ul>
+                <h2 class="display-6 mb-3"><?= $lang == 'id' ? $meta['deskripsi_halaman_id'] : $meta['deskripsi_halaman_en']; ?></h2>
+                <p class="mb-2"><?= $lang == 'id' ? $profil['deskripsi_perusahaan_id'] : $profil['deskripsi_perusahaan_en']; ?></p>
             </div>
 
             <!-- Kolom Gambar -->
             <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.4s">
                 <div class="text-center">
-                    <img src="img/tentang.jpeg" alt="Tumbler Minuma"
+                    <img src="<?= base_url('assets/img/' . $profil['foto_perusahaan']); ?>" alt="<?= $lang == 'id' ? $profil['alt_foto_perusahaan_id'] : $profil['alt_foto_perusahaan_en']; ?>"
                         class="img-fluid rounded shadow-sm"
                         style="max-width: 70%; height: auto;">
                 </div>

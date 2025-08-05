@@ -6,8 +6,7 @@
         <div class="container py-5">
             <!-- Judul dan Deskripsi Halaman -->
             <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                <h1 class="text-primary">Kontak</h1>
-                <p class="mb-0">Kami siap membantu Anda. Jika memiliki pertanyaan seputar produk, pemesanan, atau kemitraan, silakan hubungi kami melalui informasi berikut atau langsung kunjungi lokasi kami.</p>
+                <h1 class="text-primary"><?= $lang == 'id' ? $meta['nama_halaman_id'] : $meta['nama_halaman_en']; ?></h1>
             </div>
 
             <!-- Konten Kontak -->
@@ -25,10 +24,8 @@
                 <!-- Card Kontak -->
                 <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.4s">
                     <div class="bg-light p-5 rounded shadow-sm h-100">
-                        <h4 class="text-primary mb-3">Informasi Kontak</h4>
-                        <p><i class="fas fa-map-marker-alt text-primary me-2"></i> Jl. Contoh No. 123, Surabaya, Indonesia</p>
-                        <p><i class="fas fa-envelope text-primary me-2"></i> support@minuma.com</p>
-                        <p><i class="fas fa-phone-alt text-primary me-2"></i> +62 812 3456 7890</p>
+                        <h4 class="text-primary mb-3"><?= $lang == 'id' ? $meta['deskripsi_halaman_id'] : $meta['deskripsi_halaman_en']; ?></h4>
+                        <p><?= $lang == 'id' ? $kontak['deskripsi_kontak_id'] : $kontak['deskripsi_kontak_en']; ?></p>
                     </div>
                 </div>
             </div>

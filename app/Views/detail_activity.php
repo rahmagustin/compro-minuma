@@ -5,25 +5,21 @@
     <div class="container py-5">
         <div class="row g-5">
             <!-- Konten Utama Artikel -->
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="mb-5">
-                    <h1 class="mb-4 text-primary">Membersihkan Sampah Plastik</h1>
-                    <img src="img/aktivitas1.jpeg" alt="Gambar Artikel" class="img-fluid rounded mb-4">
+                    <h1 class="mb-4 text-primary"><?= $lang == 'id' ? $aktivitas['judul_aktivitas_id'] : $aktivitas['judul_aktivitas_en']; ?></h1>
+                    <img src="<?= base_url('assets/img/' . $aktivitas['foto_aktivitas']); ?>" alt="<?= $lang == 'id' ? $aktivitas['alt_aktivitas_id'] : $aktivitas['alt_aktivitas_en']; ?>" alt="Gambar Artikel" class="img-fluid rounded mb-4">
                     <div class="mb-3 text-muted small">
-                        <span>Kegiatan Sosial</span>
+                        <span class="badge bg-primary me-2"><?= $lang == 'id' ? $aktivitas['nama_kategori_id'] : $aktivitas['nama_kategori_en']; ?></span>
                     </div>
                     <p>
-                        Kegiatan membersihkan sampah plastik yang diadakan oleh komunitas Minuma sukses dilaksanakan di pesisir pantai selatan.
-                        Ratusan relawan turut berpartisipasi dalam mengumpulkan sampah plastik demi menjaga kebersihan laut dan mendukung gerakan lingkungan berkelanjutan.
-                    </p>
-                    <p>
-                        Kegiatan ini tidak hanya berdampak pada lingkungan, tetapi juga membangun kesadaran masyarakat sekitar tentang pentingnya mengurangi penggunaan plastik sekali pakai.
+                        <?= $lang == 'id' ? $aktivitas['deskripsi_aktivitas_id'] : $aktivitas['deskripsi_aktivitas_en']; ?>
                     </p>
                 </div>
             </div>
 
             <!-- Sidebar Artikel Terkait -->
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <div class="mb-5">
                     <h4 class="text-primary mb-4">Artikel Terkait</h4>
                     <div class="d-flex mb-3">
@@ -48,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- Detail Artikel End -->
