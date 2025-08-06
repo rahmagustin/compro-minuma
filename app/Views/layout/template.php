@@ -105,6 +105,10 @@ if (!empty($categoriesAktivitas)) {
     <meta content="" name="keywords">
     <meta content="" name="description">
 
+    <link href=" <?= base_url('logo.png'); ?>" rel="icon">
+
+    <link rel="icon" href="<?= base_url('assets/img/logo.png'); ?>">
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
